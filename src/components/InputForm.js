@@ -32,6 +32,7 @@ export const InputForm = () => {
           name="title"
           value={values.title}
           required
+          autoComplete='off'
           placeholder="Titulo"
           onChange={(e) => handleInputChange(e)}
         />

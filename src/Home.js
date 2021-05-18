@@ -9,6 +9,7 @@ export const Home = () => {
   return (
     <Provider store={store}>
       <div className="container">
+        <h1 className='title'>Todo List</h1>
         <InputForm />
         <TodoList />
       </div>

@@ -27,3 +27,8 @@ Funcionalidad:
   librerías a usar, etc.
   Si desea puede agregar otras funcionalidades que crea convenientes (más filtros, paginado,
   etc.), todo suma.
+
+
+# Correr en local
+
+Ejecutar el comando `npm i` para instalar las dependencias necesarias y luego ejecutar `npm start` para correr de forma local.
