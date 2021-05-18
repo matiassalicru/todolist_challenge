@@ -1,23 +1,24 @@
-import React, { useContext } from "react";
-import { TasksContext } from "../Context/tasksContext";
+import React from "react";
+import { useDispatch } from "react-redux";
 import { useForm } from "../Hooks/useForm";
+import { addTask } from "../store/actions";
 
 const initialTask = {
   title: "",
-  priority: "Media",
-  state: "nueva",
+  priority: "Alta",
+  state: "Nueva",
   description: "",
 };
 
 export const InputForm = () => {
   const [values, handleInputChange, reset] = useForm(initialTask);
-
-  const { tasksList, setTasksList } = useContext(TasksContext);
+  const dispatch = useDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(values);
-    setTasksList([values, ...tasksList]);
+
+    dispatch(addTask(values));
 
     reset();
   };
@@ -36,7 +37,7 @@ export const InputForm = () => {
         />
         <select
           name="priority"
-          id="prior"
+          // id="prior"
           value={values.priority}
           className="inputForm__input"
           onChange={(e) => handleInputChange(e)}
@@ -47,18 +48,19 @@ export const InputForm = () => {
         </select>
         <select
           name="state"
-          id="state"
+          // id="state"
           value={values.state}
           className="inputForm__input"
           onChange={(e) => handleInputChange(e)}
         >
-          <option value="nueva">Nueva</option>
-          <option value="proceso">En proceso</option>
-          <option value="finalizada">Finalizada</option>
+          <option value="Nueva">Nueva</option>
+          <option value="Proceso">En proceso</option>
+          <option value="Finalizada">Finalizada</option>
         </select>
       </label>
       <label className="inputForm__label">
         <textarea
+
           onChange={(e) => handleInputChange(e)}
           value={values.description}
           className="inputForm__textarea"

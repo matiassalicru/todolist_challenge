@@ -1,43 +1,47 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { changePriority, changeState, deleteTask } from "../store/actions";
 
 export const ListItem = ({ task }) => {
-  const [state, setState] = useState(task.state);
-  const [priority, setPriority] = useState(task.priority);
+  const [taskState, setTaskState] = useState(task.state);
+  const [taskPrior, setTaskPrior] = useState(task.priority);
+  const dispatch = useDispatch();
 
-  const changeState = () => {
-    if (state === "nueva") {
-      setState("en proceso");
-    } else if (state === "en proceso") {
-      setState("Finalizada");
-    } else if (state === "Finalizada") {
-      setState("nueva");
-    }
+  const updateState = (id) => {
+    dispatch(changeState(id));
+    setTaskState(task.state);
+    console.log(taskState);
+  }
+
+  const updatePriority = (id) => {
+    dispatch(changePriority(id));
+    setTaskPrior(task.priority);
+    console.log(taskPrior);
   };
 
-  const changePriority = () => {
-    if (priority === "Baja") {
-      setPriority("Media");
-    } else if (priority === "Media") {
-      setPriority("Alta");
-    } else if (priority === "Alta") {
-      setPriority("Baja");
-    }
-  };
+  const delTask = () => {
+    dispatch(deleteTask(task.id))
+  }
 
   return (
-    <li className="todo__item">
+    <li className={`todo__item ${task.state === 'Finalizada' ? 'todo__finalizada' : ''} `}>
       <div className="todo__prior">
         <p>
           Prioridad:
-          <button onClick={(e) => changePriority(e)}>{priority}</button>
+          <button onClick={e => updatePriority(task.id)}>{task.priority}</button>
         </p>
         <p>
-          Estado: <button onClick={(e) => changeState(e)}>{state}</button>
+          Estado: <button onClick={e => updateState(task.id)}>{task.state}</button>
         </p>
       </div>
-      <p>Titulo: {task.title}</p>
-      <p>Descripción:</p>
-      <p>{task.description}</p>
+      <p className={`todo__title ${task.state === 'Finalizada' ? 'todo__finalizadaTitle' : ''} `}>Titulo: {task.title}</p>
+      <div className='todo__desc'>
+        <p>Descripción:</p>
+        <div className='todo__taskDesc'>{task.description}</div>
+      </div>
+      <button onClick={e => delTask(e)}>
+        Eliminar
+      </button>
     </li>
   );
 };

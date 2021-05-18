@@ -1,0 +1,21 @@
+.filter__title {
+    font-weight: 400;
+    margin: 10px 0;
+}
+
+.filter__form {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    label {
+        padding: 20px;
+        // background-color: lightblue;
+
+        select {
+            margin-left: 10px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    }
+}

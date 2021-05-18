@@ -1,14 +1,17 @@
-import React, { useContext } from "react";
-import { TasksContext } from "../Context/tasksContext";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Filter } from "./Filter";
 import { ListItem } from "./ListItem";
 
 export const TodoList = () => {
-  const { tasksList } = useContext(TasksContext);
-  
+  const tasks = useSelector(state => state.tasks)
+
+
   return (
     <ul className="todo__list">
-      {tasksList.length >= 1 ? (
-        tasksList.map((task, i) => <ListItem task={task} key={i} />)
+      <Filter />
+      {tasks.length >= 1 ? (
+        tasks.map((task, i) => <ListItem task={task} key={i} />)
       ) : (
         <div>No hay tareas</div>
       )}

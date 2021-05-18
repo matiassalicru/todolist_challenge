@@ -1,16 +1,17 @@
 import React from "react";
 import { InputForm } from "./components/InputForm";
 import { TodoList } from "./components/TodoList";
-import { TasksProvider } from "./Context/tasksContext";
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 import "./styles/style.scss";
 
 export const Home = () => {
   return (
-    <TasksProvider>
+    <Provider store={store}>
       <div className="container">
         <InputForm />
         <TodoList />
       </div>
-    </TasksProvider>
+    </Provider >
   );
 };
